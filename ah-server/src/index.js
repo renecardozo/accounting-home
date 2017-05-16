@@ -10,8 +10,8 @@ app.get('/', (req, res) => {
   res.end('Hello World!!' + food.toString());
 })
 
-app.get('/holaAriel', (req,res) => {
-	res.send('Hola Ariel');
+app.get('/helloWorld', (req,res) => {
+	res.send('Hola Mundo :P');
 })
 
 app.listen(3000, () => {
