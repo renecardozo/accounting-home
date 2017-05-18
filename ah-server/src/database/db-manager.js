@@ -1,19 +1,51 @@
-"use strict";
-
-// Food is a base class
-class Food {
-
-    constructor (name) {
-        this.name = name;
+import Db from './connection'
+const ObjectId = require('mongodb').ObjectID;
+let db = new Db();
+class DbManager {
+  constructor (collectionName) {
+    this.name = collectionName;
+  }
+  async connect() {
+    this.db = await db.connect();
+  }
+  async insertOne(data) {
+    const operation = await this.db.collection(this.name).insertOne(data);
+    if (operation.result.ok !== 1 || operation.ops.length !== 1) {
+      throw new Error('Db insertOne error');
     }
-
-    toString () {
-        return `Name : ${this.name}`
+    return operation.ops[0];
+  }
+  async findOneById(id) {
+    let query = {
+      _id: ObjectId(id)
     }
-
-    print () {
-      console.log( this.toString() );
+    const result = await this.db.collection(this.name).findOne(query);
+    if (!result) {
+      throw new Error('Db findOneById error');
     }
+    return result;
+  }
+  async findOneAndUpdate(id, data) {
+    const query = {_id: ObjectId(id)};
+    const modifier = {$set: data};
+    const options = {returnOriginal: false};
+    const operation = await this.db
+      .collection(this.name)
+      .findOneAndUpdate(query, modifier, options);
+ 
+    if (!operation.value) {
+      throw new Error('Db findOneAndUpdate error');
+    }
+    return operation.value;
+  }
+  async removeOne(id) {
+    const query = {_id: ObjectId(id)};
+    const operation = await this.db.collection(this.name).remove(query);
+    if (operation.result.n !== 1) {
+      throw new Error('Db remove error');
+    }
+    return {success: true};
+  }
 }
 
-module.exports = Food;
+export default  DbManager;

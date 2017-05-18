@@ -1,28 +1,13 @@
-"use strict";
-import Config from './config/config';
+import Config from '../config/config';
 import { MongoClient } from 'mongodb';
-import Q from 'q';
-
-let _singleton = Symbol();
-
-class Connection {
-
-    constructor(singletonToken) {
-        if (_singleton !== singletonToken)
-            throw new Error('Cannot instantiate directly.');
+let db;
+class Db {
+  constructor() {}
+  async connect() {
+    if (!db) {
+      db = await MongoClient.connect(Config.db.url);
     }
-
-    static get instance() {
-        if(!this[_singleton])
-            this[_singleton] = new Singleton(_singleton);
-
-        return this[_singleton]
-    }
-
-    connect(){
-      let deferred = Q.defer();
-
-    }
+    return db;
+  }
 }
-
-export default Connection;
+export default Db;
