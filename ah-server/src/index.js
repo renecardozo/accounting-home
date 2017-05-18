@@ -1,19 +1,13 @@
-import Food from './database/db-manager';
 import express from 'express';
+import bodyParser from 'body-parser';
+import Config from './config/config'
+import Db from './database/db-manager';
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+var routes = require('./routes/accouting-home.route');
+routes(app);
 
-let app = express();
-
-app.get('/', (req, res) => {
-	let food = new Food('Neko');
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  food.print();
-  res.end('Hello World!!' + food.toString());
-})
-
-app.get('/helloWorld', (req,res) => {
-	res.send('Hola Mundo :P');
-})
-
-app.listen(3000, () => {
+app.listen(Config.port, () => {
   console.log('Accounting Home app listening on port 3000!');
 })

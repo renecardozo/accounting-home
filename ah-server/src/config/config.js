@@ -1,14 +1,6 @@
-"use strict";
-
-class Config {
-    constructor () {}
-    toString () {
-        return {
-          'db': 'mydb',
-          'port': '27017',
-          'host': '127.0.0.1'
-        }
-    }
-}
-
-module.exports = Config;
+module.exports = {
+  port: 3000,
+  db: {
+    url: 'mongodb://localhost:27017/mydb'
+  }
+};
