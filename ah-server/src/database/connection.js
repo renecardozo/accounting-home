@@ -5,7 +5,11 @@ class Db {
   constructor() {}
   async connect() {
     if (!db) {
-      db = await MongoClient.connect(Config.db.url);
+		try {
+			db = await MongoClient.connect(Config.db.url);
+		} catch (err){
+			throw new Error('Cannot connect with db');
+		}
     }
     return db;
   }
