@@ -19,10 +19,6 @@ class DbManager {
 	} catch (err){
 		throw new Error('Db insertOne error');
 	}
-    /*if (operation.result.ok !== 1 || operation.ops.length !== 1) {
-      throw new Error('Db insertOne error');
-    }
-    return operation.ops[0];*/
   }
   
   async findOneById(id) {
@@ -36,7 +32,6 @@ class DbManager {
 	} catch (err){
 		throw new Error('Db findOneById error');
 	}
-    
   }
   
   async findOneAndUpdate(id, data) {
@@ -52,7 +47,7 @@ class DbManager {
     }
     return operation.value;
   }
-  
+
   async removeOne(id) {
     const query = {_id: ObjectId(id)};
     const operation = await this.db.collection(this.name).remove(query);
