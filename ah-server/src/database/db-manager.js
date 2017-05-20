@@ -4,7 +4,7 @@ let db = new Db();
 class DbManager {
 	
   constructor (collectionName) {
-    this.name = collectionName;
+  	this.name = collectionName;
 	this.connect();
   }
   
@@ -22,10 +22,10 @@ class DbManager {
     }
   }
 
-  async getAll(callback) {
+  async getAll() {
     try {
-      const operation = await this.db.collection(this.name).find({})
-      .toArray(callback);
+      const result = await this.db.collection(this.name).find({}).toArray();
+      return result;
     } catch (err){
       throw new Error(err);
     }
