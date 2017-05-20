@@ -13,12 +13,22 @@ class DbManager {
   }
   
   async insertOne(data) {
-	try {
-		const operation = await this.db.collection(this.name).insertOne(data);
-		return operation.ops[0];
-	} catch (err){
-		throw new Error('Db insertOne error');
-	}
+    try {
+      console.log('get all', this.name);
+      const operation = await this.db.collection(this.name).insertOne(data);
+      return operation.ops[0];
+    } catch (err){
+      throw new Error('Db insertOne error');
+    }
+  }
+
+  async getAll(callback) {
+    try {
+      const operation = await this.db.collection(this.name).find({})
+      .toArray(callback);
+    } catch (err){
+      throw new Error(err);
+    }
   }
   
   async findOneById(id) {
