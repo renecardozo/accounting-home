@@ -2,8 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Config from './config/config'
 import Db from './database/db-manager';
-import routes from './routes/accouting-home.route';
+import routes from './routes/rubro.route';
+
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
