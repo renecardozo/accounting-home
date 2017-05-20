@@ -3,10 +3,18 @@ import DbManager from '../database/db-manager';
 
 const dbManager = new DbManager('rubro');
 
-exports.listAllRubros = function(req, res) {
-  /*
-  *TODO implement list all Rubros 
-  */
+exports.listAllRubros = async function(req, res) {
+  let responseValue;
+	try {
+		res.setHeader("Content-Type", "application/json");
+		dbManager.getAll(function(err, result) {
+			res.send(result);
+		});
+		
+	} catch (err){
+		responseValue = {'error':err.message};
+		res.send(responseValue);
+	}
 
 };
 

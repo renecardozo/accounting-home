@@ -1,3 +1,17 @@
-<h1>
-  {{title}}
-</h1>
+<div class="form-container">
+  <label for="rubroField">Rubro</label>
+  <input type="text" name="rubroField" [(ngModel)]="rubro">
+  <button type="button" (click)="Register()">Register</button>      
+</div>
+<div class="table-container">
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+    </tr>
+    <tr *ngFor="let t of rubros">
+      <td>{{t._id}}</td>
+      <td>{{t.rubro}}</td>
+    </tr>
+  </table>
+</div>
