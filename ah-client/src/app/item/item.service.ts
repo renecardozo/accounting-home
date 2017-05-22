@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Http, Response,Headers, RequestOptions }  from '@angular/http';
+import { Http, Response, Headers, RequestOptions }  from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -23,10 +23,32 @@ export class ItemService {
   create(name: string): Observable<Rubro> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-
-    return this.http.post(this.rubrosUrl, { "rubro": name }, options)
+    
+    if (this.validateName(name)) {
+      return this.http.post(this.rubrosUrl, { "rubro": name }, options)
                     .map(this.extractData)
                     .catch(this.handleError);
+    }
+  }
+  
+  update(name: string, id: string): Observable<Rubro> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    
+    if (this.validateName(name)) {
+      return this.http.put(this.rubrosUrl+'/'+id, { "rubro": name }, options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
+  }
+  
+  delete(id: string): Observable<Rubro> {
+    
+    if (id !== undefined) {
+      return this.http.delete(this.rubrosUrl+'/'+id)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
   }
 
   private extractData(res: Response) {
@@ -34,6 +56,12 @@ export class ItemService {
     
     return body;
   }
+  
+  private validateName(name: string) {
+    let regExp = new RegExp('^[^_+-.,!@#$%^&*();/|\\<>"\']{1,20}$');
+    return regExp.test(name);
+  }
+  
   private handleError (error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;

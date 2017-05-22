@@ -48,7 +48,7 @@ exports.readARubro = async function(req, res) {
 };
 
 exports.updateARubro = async function(req, res) {
-  let operation;
+	let operation;
 	try {
 		res.setHeader("Content-Type", "application/json");
 		operation = await dbManager.findOneAndUpdate(req.params.accoutingHomeId, req.body);
@@ -59,8 +59,14 @@ exports.updateARubro = async function(req, res) {
 	}
 };
 
-exports.deleteARubro = function(req, res) {
- /*
-  *TODO implement list all Rubros 
-  */
+exports.deleteARubro = async function(req, res) {
+	let operation;
+	try {
+		res.setHeader("Content-Type", "application/json");
+		operation = await dbManager.removeOne(req.params.accoutingHomeId);
+	} catch (err){
+		operation = {'error':err.message};
+	} finally {
+		res.send(operation);
+	}
 };
