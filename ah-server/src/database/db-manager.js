@@ -9,16 +9,21 @@ class DbManager {
   }
   
   async connect() {
-    this.db = await db.connect();
+	try {
+		this.db = await db.connect();
+	} catch (err) {
+		console.log('Unable to connect with DB');
+		throw err;
+	}
   }
   
   async insertOne(data) {
     try {
-      console.log('get all', this.name);
       const operation = await this.db.collection(this.name).insertOne(data);
       return operation.ops[0];
     } catch (err){
-      throw new Error('Db insertOne error');
+	  console.log('DB insertOne error');
+	  throw err;
     }
   }
 
@@ -27,7 +32,8 @@ class DbManager {
       const result = await this.db.collection(this.name).find({}).toArray();
       return result;
     } catch (err){
-      throw new Error(err);
+	  console.log('DB getAll error');
+      throw err;
     }
   }
   
@@ -40,7 +46,8 @@ class DbManager {
 		const result = await this.db.collection(this.name).findOne(query);
 		return result;
 	} catch (err){
-		throw new Error('Db findOneById error');
+		console.log('DB findOneById error');
+		throw err;
 	}
   }
   
@@ -48,23 +55,26 @@ class DbManager {
     const query = {_id: ObjectId(id)};
     const modifier = {$set: data};
     const options = {returnOriginal: false};
-    const operation = await this.db
-      .collection(this.name)
-      .findOneAndUpdate(query, modifier, options);
- 
-    if (!operation.value) {
-      throw new Error('Db findOneAndUpdate error');
-    }
-    return operation.value;
+	
+	try {
+		const operation = await this.db.collection(this.name).findOneAndUpdate(query, modifier, options);
+		return operation.value;
+	} catch (err){
+		console.log('DB findOneAndUpdate error');
+		throw err;
+	}  
   }
 
   async removeOne(id) {
     const query = {_id: ObjectId(id)};
-    const operation = await this.db.collection(this.name).remove(query);
-    if (operation.result.n !== 1) {
-      throw new Error('Db remove error');
-    }
-    return {success: true};
+	
+	try {
+		const operation = await this.db.collection(this.name).remove(query);
+		return {success: true};
+	} catch (err){
+		console.log('DB removeOne error');
+		throw err;
+	}  
   }
 }
 

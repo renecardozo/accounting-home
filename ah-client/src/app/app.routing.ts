@@ -13,7 +13,8 @@ const appRoutes: Routes = [
     }, 
     {
         path: 'item', component: ItemComponent
-    }, {
+    }, 
+    {
         path: 'login', component: LoginComponent
     }
 ];
