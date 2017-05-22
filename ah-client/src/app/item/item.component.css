@@ -78,3 +78,19 @@ tr:nth-child(even) {background-color: #f2f2f2}
 .fa-pencil:hover, .fa-trash:hover{
     cursor:pointer;
 }
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color:#bbb;
+  font-style:italic;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color:#bbb;
+  font-style:italic;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color:#bbb;
+  font-style:italic;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color:#bbb;
+  font-style:italic;
+}
