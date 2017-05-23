@@ -1,3 +1,7 @@
+/**
+ * Setting to connect to data base.
+ * @type {Object}
+ */
 module.exports = {
   port: 3000,
   db: {

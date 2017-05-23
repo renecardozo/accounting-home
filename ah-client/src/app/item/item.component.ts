@@ -19,6 +19,9 @@ export class ItemComponent implements OnInit {
 
     constructor(private appService: ItemService) {}
 
+    /**
+     * Creates a new rubro
+     */
     Register(): void {
         this.appService.create(this.rubro)
                     .subscribe(
@@ -29,6 +32,9 @@ export class ItemComponent implements OnInit {
                         error =>  this.errorMessage = <any>error);
     }
     
+    /**
+     * Returns all rubros created
+     */
     GetRubros(): void {
         this.appService.getRubros()
                         .subscribe(rubros =>
@@ -41,11 +47,18 @@ export class ItemComponent implements OnInit {
                         this.errorMessage = <any>error);
     }
     
+    /**
+     * Initialize properties of component.
+     */
     ngOnInit(): void {
         console.log('Initialize!!');
         this.GetRubros();
     }
     
+    /**
+     * Edit a rubro
+     * @param {Rubro} rubroToUpdate Ther rubro to be udpated.
+     */
     editItem(rubroToUpdate: Rubro): void {
         this.appService.update(this.rubro, rubroToUpdate._id)
                     .subscribe(
@@ -57,6 +70,10 @@ export class ItemComponent implements OnInit {
                         error =>  this.errorMessage = <any>error);
     }
     
+    /**
+     * Deletes a rubro.
+     * @param {Rubro} rubroToDelete The rubro to be deleted.
+     */
     deleteItem(rubroToDelete: Rubro): void {
         this.appService.delete(rubroToDelete._id)
                     .subscribe(

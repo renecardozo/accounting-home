@@ -1,13 +1,17 @@
 import Db from './connection'
 const ObjectId = require('mongodb').ObjectID;
 let db = new Db();
+
 class DbManager {
-	
   constructor (collectionName) {
   	this.name = collectionName;
 	this.connect();
   }
   
+  /**
+   * Connect to data base.
+   * @return {Promise<Instance>} A promise to instance of the data base.
+   */
   async connect() {
 	try {
 		this.db = await db.connect();
@@ -17,6 +21,11 @@ class DbManager {
 	}
   }
   
+  /**
+   * Inserts new data into data base.
+   * @param  {Object} data The data that will stored in the data base.
+   * @return {Promise<Document>} A promise to the Document.
+   */
   async insertOne(data) {
     try {
       const operation = await this.db.collection(this.name).insertOne(data);
@@ -27,6 +36,10 @@ class DbManager {
     }
   }
 
+  /**
+   * Get all document from data base.
+   * @return {Promise<Document>} A promise to the Document.
+   */
   async getAll() {
     try {
       const result = await this.db.collection(this.name).find({}).toArray();
@@ -37,6 +50,11 @@ class DbManager {
     }
   }
   
+  /**
+   * Get a document according the id of the document.
+   * @param  {String} id The identify to search the document.
+   * @return {Promise<Document>} A promise to the Document
+   */
   async findOneById(id) {
     let query = {
       _id: ObjectId(id)
@@ -51,6 +69,12 @@ class DbManager {
 	}
   }
   
+  /**
+   * Find and update a document according a id.
+   * @param  {String} id   The identify of document to be searched.
+   * @param  {Object} data Properties to be updated.
+   * @return {Promise<Document>} A promise to the Document.
+   */
   async findOneAndUpdate(id, data) {
     const query = {_id: ObjectId(id)};
     const modifier = {$set: data};
@@ -65,6 +89,11 @@ class DbManager {
 	}  
   }
 
+  /**
+   * Removes the document given a id
+   * @param  {String} id The identify of document.
+   * @return {Promise<Document>} A promise to the Document.
+   */
   async removeOne(id) {
     const query = {_id: ObjectId(id)};
 	

@@ -2,7 +2,16 @@ import Config from '../config/config';
 import { MongoClient } from 'mongodb';
 let db;
 class Db {
+  /**
+   * Function constructor for data base
+   * @return {[type]}
+   */
   constructor() {}
+
+  /**
+   * Connect to data base.
+   * @return {Promise<Instance>} A promise to instance of the data base.
+   */
   async connect() {
     if (!db) {
 		try {

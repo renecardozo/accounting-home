@@ -9,10 +9,18 @@ import { Settings } from '../app.config';
 @Injectable()
 export class ItemService {
   private rubrosUrl;
+  /**
+   * Initialize the setting for this service.
+   * @param {Http} private http [description]
+   */
   constructor(private http: Http) {
     this.rubrosUrl = Settings.protocol+'://'+Settings.host+':'+Settings.port +'/'+Settings.middlewares.rubros;
    }
 
+  /**
+  * Return all rubros from server.
+  * @return {Observable<Rubro[]>} A list a rubros.
+  */
   getRubros(): Observable<Rubro[]> {
     
     return this.http.get(this.rubrosUrl)
@@ -20,6 +28,11 @@ export class ItemService {
                     .catch(this.handleError);
   }
 
+  /**
+   * Creates a new rubro
+   * @param  {string}            name The name for the new rubro
+   * @return {Observable<Rubro>}      The rubro created.
+   */
   create(name: string): Observable<Rubro> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -31,6 +44,12 @@ export class ItemService {
     }
   }
   
+  /**
+   * Update a rubro
+   * @param  {string}            name The name of rubro.
+   * @param  {string}            id   The identify of rubro to be updated.
+   * @return {Observable<Rubro>}
+   */
   update(name: string, id: string): Observable<Rubro> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -42,6 +61,11 @@ export class ItemService {
     }
   }
   
+  /**
+   * Deletes a rubro given the id
+   * @param  {string}            id The id property of rubro.
+   * @return {Observable<Rubro>}
+   */
   delete(id: string): Observable<Rubro> {
     
     if (id !== undefined) {
@@ -51,17 +75,29 @@ export class ItemService {
     }
   }
 
+  /**
+   * Private method to do internal process
+   * @param {Response} res Objent comming from server.
+   */
   private extractData(res: Response) {
     let body = res.json();
     
     return body;
   }
   
+  /**
+   * Valid a name according to regular expression.
+   * @param {string} name [description]
+   */
   private validateName(name: string) {
     let regExp = new RegExp('^[^_+-.,!@#$%^&*();/|\\<>"\']{1,20}$');
     return regExp.test(name);
   }
   
+  /**
+   * Private method to handle the response of server.
+   * @param {Response | any} error The error message comming from server side.
+   */
   private handleError (error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure
     let errMsg: string;
