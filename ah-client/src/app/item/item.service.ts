@@ -90,7 +90,7 @@ export class ItemService {
    * @param {string} name [description]
    */
   private validateName(name: string) {
-    let regExp = new RegExp('^[^_+-.,!@#$%^&*();/|\\<>"\']{1,20}$');
+    let regExp = new RegExp('[a-zA-Z]{1,20}$');
     return regExp.test(name);
   }
   
