@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { Settings } from './app.config';
 import { routing, appRoutingProviders } from './app.routing';
 
+
 @NgModule({
   declarations: [
     AppComponent,
