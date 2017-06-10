@@ -1,28 +1,16 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import Config from './config/config'
-import Db from './database/db-manager';
-import routes from './routes/rubro.route';
+'use strict'
 
-/**
- * Instance of app created from expressjs
- * @type {Object}
- */
-const app = express();
+const mongoose = require('mongoose');
+const app = require('./app')
+const config = require('./config')
 
-app.use(cors())
+mongoose.connect(config.db,(err, res) => {
+    if(err) {
+      console.log(`Error al conectar a la base de datos: ${err}`)
+    }
+    console.log('Conexion a la base de datos establecida...');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-routes(app);
-
-/**
- * Setting properties to run the server.
- * @param  { Number } Config.port The number of port where is running the server.
- * @param  {Callback} ArrawFunction it is the callback called when de server is running.
- */
-app.listen(Config.port, () => {
-  console.log('Accounting Home app listening on port 3000!');
+    app.listen(config.port, () => {
+        console.log(`Accounting Home app listening on port: ${config.port}!`);
+    })
 })
