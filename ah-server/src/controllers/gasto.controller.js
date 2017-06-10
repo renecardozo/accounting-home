@@ -1,7 +1,6 @@
 'ues strict'
 
 const Gasto = require('../models/gasto.model')
-const Rubro = require('../models/rubro.model')
 
 function saveGasto(req, res){
     let gasto= new Gasto({
@@ -16,7 +15,7 @@ function saveGasto(req, res){
 }
 
 function getGasto(req, res){
-    let productId= req.params.gastoId;
+    let gastoId= req.params.gastoId;
     Gasto.findById(gastoId, (err, gasto)=>{
         if(err) return res.status(500).send({message: `Error al realizar la petcion ${err}`})
 
