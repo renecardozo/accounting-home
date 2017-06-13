@@ -1,16 +1,19 @@
 'use strict'
+import mongoose from 'mongoose';
+import app from './app';
+import config from './config';
 
-const mongoose = require('mongoose');
-const app = require('./app')
-const config = require('./config')
+async function listen() {
+    try {
+		mongoose.Promise = global.Promise;
+		await mongoose.connect(config.db);
+		console.log('Conexion a la base de datos establecida...');
+		await app.listen(config.port);
+		console.log(`Accounting Home app listening on port: ${config.port}!`);
 
-mongoose.connect(config.db,(err, res) => {
-    if(err) {
-      console.log(`Error al conectar a la base de datos: ${err}`)
-    }
-    console.log('Conexion a la base de datos establecida...');
+	} catch (err){
+		console.log(`Error al conectar a la base de datos: ${err}`);
+	}
+}	
 
-    app.listen(config.port, () => {
-        console.log(`Accounting Home app listening on port: ${config.port}!`);
-    })
-})
+listen();
