@@ -1,4 +1,5 @@
 'use strict'
+
 const express = require('express')
 const bodyParser= require('body-parser')
 const app = express()
@@ -9,9 +10,11 @@ const apiGastoEspecifico = require('./routes/gasto-especifico.route')
 const apiIngreso = require('./routes/ingreso.route')
 const apiUmbral = require('./routes/umbral.route')
 const apiRubro = require('./routes/rubro.route')
+
 import cors from 'cors';
 
 app.use(cors())
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api',api)

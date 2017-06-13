@@ -1,8 +1,6 @@
 'use strict'
-
 const express = require('express')
 const RubroCrl = require('../controllers/rubro.controller')
-
 const api = express.Router()
 
 api.get('/rubro',RubroCrl.getRubros)

@@ -19,6 +19,10 @@ function signUp(req, res){
 }
 
 function signIn(req, res){
+<<<<<<< HEAD
+    console.log('the email is:'+req.body.email)
+=======
+>>>>>>> f9feaa05415eabe77b6bb20ee08d3dcabcf3ef2d
     User.find({email: req.body.email}, (err, user) =>{
         console.log('the user is')
         console.log(user.email)

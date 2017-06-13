@@ -1,5 +1,9 @@
 'use strict'
+
 /*<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 17c961fc527394bd1286e391c2a96328d4181bc2
 
 const mongoose = require('mongoose');
 const app = require('./app')
@@ -15,7 +19,9 @@ mongoose.connect(config.db,(err, res) => {
         console.log(`Accounting Home app listening on port: ${config.port}!`);
     })
 })
+<<<<<<< HEAD
 ======= */
+
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config';
@@ -34,4 +40,5 @@ async function listen() {
 }	
 
 listen();
+
 //>>>>>>> f9feaa05415eabe77b6bb20ee08d3dcabcf3ef2d
