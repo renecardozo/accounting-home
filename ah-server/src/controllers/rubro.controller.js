@@ -24,15 +24,15 @@ function getRubro(req, res){
     })
 }
 
-<<<<<<< HEAD
-function getRubros(req, res){
+//por favor quisiera que me expliquen porque agregaron metodos asincronos aqui, los metodos asincronos
+// y promesas se deben manejar del lado de cliente osea desde angular no desde el backend
+/*function getRubros(req, res){
     Rubro.find({},(err, rubros)=>{
         if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
         if(!rubros) return res.status(404).send({message: `no existen rubros`})
 
         res.status(200).send({rubros})
-    })
-=======
+    })*/
 async function getRubros(req, res){
 	try {
 		let rubros = await Rubro.find({});
@@ -41,7 +41,6 @@ async function getRubros(req, res){
 	} catch (err){
 		res.status(500).send({message: `Error al realizar la peticion: ${err}`});
 	}
->>>>>>> f9feaa05415eabe77b6bb20ee08d3dcabcf3ef2d
 }
 
 function updateRubro(req, res){
