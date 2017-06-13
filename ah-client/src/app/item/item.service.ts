@@ -22,9 +22,8 @@ export class ItemService {
   * @return {Observable<Rubro[]>} A list a rubros.
   */
   getRubros(): Observable<Rubro[]> {
-    
     return this.http.get(this.rubrosUrl)
-                    .map(res => { return res.json(); })
+                    .map(res => { return res.json().rubros; })
                     .catch(this.handleError);
   }
 

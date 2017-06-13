@@ -24,13 +24,14 @@ function getRubro(req, res){
     })
 }
 
-function getRubros(req, res){
-    Rubro.find({},(err, rubros)=>{
-        if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
-        if(!rubros) return res.status(404).send({message: `no existen rubros`})
-
-        res.status(200).send({rubros})
-    })
+async function getRubros(req, res){
+	try {
+		let rubros = await Rubro.find({});
+		if(!rubros) return res.status(404).send({message: `no existen rubros`})
+		res.status(200).send({rubros})
+	} catch (err){
+		res.status(500).send({message: `Error al realizar la peticion: ${err}`});
+	}
 }
 
 function updateRubro(req, res){
