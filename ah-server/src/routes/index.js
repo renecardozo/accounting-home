@@ -8,7 +8,7 @@ const api = express. Router()
 
 api.post('/signup',userCtrl.signUp)
 api.post('/signin',userCtrl.signIn)
-api.get('/private',auth ,function(req, res){
+api.get('/private',auth ,function(req, response){
     res.status(200).send({message: 'Tienes acceso'})
 })
 

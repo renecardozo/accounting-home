@@ -9,8 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+import {RegistroComponent} from "./registro/registro.component";
 import { Settings } from './app.config';
 import { routing, appRoutingProviders } from './app.routing';
+
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { routing, appRoutingProviders } from './app.routing';
     HomeComponent,
     ItemComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
