@@ -24,13 +24,14 @@ function getFondoAhorro(req, res){
     })
 }
 
-function getFondosAhorro(req, res){
-    FondoAhorro.find({},(err, fondos)=>{
-        if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
-        if(!fondos) return res.status(404).send({message: `No existen fondos de ahorros`})
-
-        res.status(200).send({fondos});
-    })
+async function getFondosAhorro(req, res){
+	try {
+		let fondos = await FondoAhorro.find({});
+		if(!fondos) return res.status(404).send({message: `No existen fondos de ahorros`})
+			res.status(200).send({fondos});
+	} catch (err){
+		res.status(500).send({message: `Error al realizar la peticion: ${err}`});
+	}
 }
 
 function updateFondosAhorro(req, res){
@@ -46,13 +47,12 @@ function updateFondosAhorro(req, res){
 
 function deleteFondoAhorro(req, res){
     let fondoAhorroId= req.params.fondoAhorroId
+    FondoAhorro.findById(fondoAhorroId, (err,fondo) => {
+    	if(err) res.status(500).send({message: `Error al borrar el fondo de ahorro ${err}`})
 
-  FondoAhorro.findById(fondoAhorroId, (err,fondo) => {
-    if(err) res.status(500).send({message: `Error al borrar el fondo de ahorro ${err}`})
-
-    fondo.remove(err=>{
-      if(err)res.status(500).send({message: `Error al borrar el fondo de ahorro ${err}`})
-      res.status(200).send({message: `El producto ha sido eliminado`})
+    	fondo.remove(err=>{
+    		if(err)res.status(500).send({message: `Error al borrar el fondo de ahorro ${err}`})
+    		res.status(200).send({message: `El producto ha sido eliminado`})
     })
   })
 }
