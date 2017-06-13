@@ -2,7 +2,6 @@
 const FondoAhorro = require('../models/fondo-ahorro.model');
 
 function saveFondoAhorro(req, res){
-    
     let fondo= new FondoAhorro();
     fondo.monto= req.body.monto;
     fondo.total= req.body.total;
@@ -26,7 +25,6 @@ function getFondoAhorro(req, res){
 }
 
 function getFondosAhorro(req, res){
-   
     FondoAhorro.find({},(err, fondos)=>{
         if(err) return res.status(500).send({message:`Error al realizar la peticion: ${err}`})
         if(!fondos) return res.status(404).send({message: `No existen fondos de ahorros`})

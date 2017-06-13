@@ -18,17 +18,17 @@ ul.ah-nav li a {
 }
 
 ul.ah-nav li a:hover:not(.active) {
-    background-color: #111;
+    background-color: #15A9FA;
 }
 ul.ah-nav li a.active  {
-    background-color: #4CAF50;
+    background-color: #3c4f74;
 }
 ul.ah-nav li.right {
     float: right;
 }
 
 @media screen and (max-width: 600px){
-    ul.ah-nav li.right, 
+    ul.ah-nav li.right,
     ul.ah-nav li {
         float: none;
     }

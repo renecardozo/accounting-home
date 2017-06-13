@@ -28,6 +28,7 @@ export class ItemComponent implements OnInit {
                         rubro  => {
                         console.log('create!!', rubro);
                         this.rubros.push(rubro);
+                        this.GetRubros();
                         },
                         error =>  this.errorMessage = <any>error);
     }
@@ -66,6 +67,7 @@ export class ItemComponent implements OnInit {
                         console.log('update from :', rubroToUpdate, 'to', rubro);
                         let index = this.rubros.indexOf(rubroToUpdate);
                         this.rubros[index] = rubro;
+                        this.GetRubros();
                         },
                         error =>  this.errorMessage = <any>error);
     }
