@@ -1,9 +1,9 @@
 const settings: any = {
     host: 'localhost',
     protocol: 'http',
-    port: '3000',
+    port: '3001',
     middlewares: {
-        rubros: 'rubros'
+        rubros: 'api_rubro/rubro'
     }
 }
 export const Settings = settings;

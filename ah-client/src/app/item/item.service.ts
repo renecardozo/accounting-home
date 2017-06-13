@@ -22,9 +22,8 @@ export class ItemService {
   * @return {Observable<Rubro[]>} A list a rubros.
   */
   getRubros(): Observable<Rubro[]> {
-    
     return this.http.get(this.rubrosUrl)
-                    .map(res => { return res.json(); })
+                    .map(res => { return res.json().rubros; })
                     .catch(this.handleError);
   }
 
@@ -90,7 +89,7 @@ export class ItemService {
    * @param {string} name [description]
    */
   private validateName(name: string) {
-    let regExp = new RegExp('[a-zA-Z]{1,20}$');
+    let regExp = new RegExp('^[^_+-.,!@#$%^&*();/|\\<>"\']{1,20}$');
     return regExp.test(name);
   }
   

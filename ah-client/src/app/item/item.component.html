@@ -1,11 +1,13 @@
+
+<!--
 <div class="form-container">
   <form>
     <label class="ah-label-item" for="rubroField" >Rubro</label>
     <input type="text" name="rubroField" [(ngModel)]="rubro" class="ah-input-text" placeholder="Ingrese aqui el nombre para actualizar o crear un rubro...">
     <div class="container-button">
-      <button class="ah-btn ah-style-btn" type="button" (click)="Register()">Register</button> 
+      <button class="ah-btn ah-style-btn" type="button" (click)="Register()">Register</button>
     </div>
-  </form>    
+  </form>
 </div>
 <div class="table-container">
   <table>
@@ -22,4 +24,48 @@
       <td><i class="fa fa-trash" aria-hidden="true" (click)="deleteItem(item)"></i></td>
     </tr>
   </table>
+</div> -->
+
+
+
+
+<div class="view hm-black-strong">
+  <div class="full-bg-img flex-center">
+    <ul>
+      <li>
+        <h1 class="h1-responsive wow fadeInDown text-center" data-wow-delay="0.2s">HOME APP</h1></li>
+
+    </ul>
+  </div>
 </div>
+<!--/.Mask-->
+
+<!-- Main container-->
+<div class="container ampliar-abajo">
+
+  <div class="form-container">
+    <form>
+      <label class="ah-label-item" for="rubroField" >Rubro</label>
+      <input type="text" name="rubroField" [(ngModel)]="rubro" class="ah-input-text" placeholder="Ingrese aqui el nombre para actualizar o crear un rubro...">
+      <div class="container-button">
+        <button class="ah-btn ah-style-btn" type="button" (click)="Register()">Register</button>
+      </div>
+    </form>
+  </div>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      <tr *ngFor="let item of rubros">
+        <td>{{item.rubro}}</td>
+        <td><i class="fa fa-pencil" aria-hidden="true" (click)="editItem(item)"></i></td>
+        <td><i class="fa fa-trash" aria-hidden="true" (click)="deleteItem(item)"></i></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+
