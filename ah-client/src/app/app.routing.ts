@@ -7,7 +7,7 @@ import { RegistroComponent } from './registro/registro.component';
 
 const appRoutes: Routes = [
     {
-        path: '', redirectTo: '/home', pathMatch: 'full'
+        path: '', redirectTo: '/login', pathMatch: 'full'
     },
     {
         path: 'home', component: HomeComponent
