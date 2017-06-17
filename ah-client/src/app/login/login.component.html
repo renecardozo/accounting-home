@@ -1,14 +1,12 @@
 
-<body>
+
 
 
 <!--Mask-->
 <div class="view hm-black-strong">
-  <div class="full-bg-img flex-center">
+  <div class="full-bg-img flex-center ">
     <ul>
-      <li>
-        <h1 class="centered-text" data-wow-delay="0.2s"> HOME APP</h1>
-      </li>
+      <h1 class="centered-text" data-wow-delay="0.2s"> HOME APP</h1>
       <div class="container">
         <div class="row centered-form">
           <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
@@ -24,12 +22,8 @@
                   <div class="form-group ">
                     <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Contraseña">
                   </div>
-                  <li>
-                    <a href="/#" class="btn btn-primary btn-lg wow center-block" data-wow-delay="0.2s" rel="nofollow">Ingresar</a>
-                  </li>
-                  <li>
+                  <a href="/#" class="btn btn-primary btn-lg wow center-block" data-wow-delay="0.2s" rel="nofollow">Ingresar</a>
                   No tienes cuenta?<a routerLink="/registro">registrate</a>
-                  </li>
                 </form>
               </div>
             </div>
@@ -45,19 +39,24 @@
 
 <!-- Main container-->
 <div class="container">
-
- <!-- <div class="divider-new"> -->
-  <div class="flex-center">
-    <h2 class="h2-responsive wow fadeIn centered-text" data-wow-delay="0.2s">OBJETIVO</h2>
-  </div>
-
+  <style>
+    #bgColor{
+      background-color: aliceblue;
+    }
+  </style>
+  <section id="bgColor">
+  <!-- <div class="divider-new"> -->
+    <div id="bgColor" class="flex-center" ng-class="bgColor">
+      <h2 class="h2-responsive wow fadeIn centered-text" data-wow-delay="0.2s">OBJETIVO</h2>
+    </div>
+  
+  
   <!--Section: About-->
-  <section id="about" class="text-center wow fadeIn ampliar" data-wow-delay="0.2s">
+    <section class="text-center wow fadeIn ampliar" data-wow-delay="0.2s">
 
     <p>Ayudar a administrar los gastos del hogar, poder controlar nuestros recursos de manera facil
       y sencilla.</p>
-
-
+    </section>
   </section>
 <!--
   <div class="flex-center">
@@ -71,4 +70,4 @@
 
 </div>
 
-</body>
+
