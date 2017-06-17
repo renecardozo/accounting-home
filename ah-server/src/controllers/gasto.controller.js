@@ -26,8 +26,15 @@ function getGasto(req, res){
 }
 
 async function getGastos(req, res){
+    /*Gasto.find({},(err, gastos)=>{
+        if(err) return res.status(500).send({message: `Error al realizar la peticion: ${err}`})
+        if(!gastos) return res.status(404).send({message: `no existen ingresos`})
+
+        res.status(200).send({gastos})
+    })*/
+
 	try {
-		let Gasto = await Gasto.find({});
+		let gastos = await Gasto.find({});
 		if(!gastos) return res.status(404).send({message: `no existen gastos`})
 			res.status(200).send({gastos})		
 	} catch (err){
