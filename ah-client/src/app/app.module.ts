@@ -12,6 +12,10 @@ import { LoginComponent } from './login/login.component';
 import {RegistroComponent} from "./registro/registro.component";
 import { Settings } from './app.config';
 import { routing, appRoutingProviders } from './app.routing';
+import { GastoComponent } from './gasto/gasto.component';
+import { IngresoComponent } from './ingreso/ingreso.component';
+import { GastoService } from './services/gasto/gasto.service';
+import { IngresoService } from './services/ingreso/ingreso.service';
 
 
 
@@ -22,7 +26,9 @@ import { routing, appRoutingProviders } from './app.routing';
     ItemComponent,
     HeaderComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    GastoComponent,
+    IngresoComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,9 @@ import { routing, appRoutingProviders } from './app.routing';
     routing
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    GastoService,
+    IngresoService
   ],
   bootstrap: [
     AppComponent
