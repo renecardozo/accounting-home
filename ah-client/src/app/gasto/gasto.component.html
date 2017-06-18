@@ -2,7 +2,7 @@
   Agregar un gasto
 </button>
 
-<!-- Modal -->
+<!-- Modal Create gasto-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -11,21 +11,61 @@
         <h4 class="modal-title" id="exampleModalLabel">Agregar un nuevo gasto</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form 
+        #gastoForm = "ngForm"
+        (ngSubmit) ="Save(gastoForm.value)" id="formGasto">
           <div class="form-group">
             <label for="recipient-name" class="control-label">monto:</label>
-            <input type="number" class="form-control" id="recipient-name">
+            <input type="number" class="form-control" id="recipient-name" name="monto" ngModel> 
           </div>
           <div class="form-group">
             <label for="message-text" class="control-label">descripcion:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" id="message-text" name="descripcion" ngModel></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" value="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar</button>
+      
+    </div>
+  </div>
+</div>
+
+<!--Modal Edit gasto-->
+<div class="modal fade" id="updateGasto" tabindex="-1" role="dialog" aria-labelledby="editGasto">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editGasto">Editar un nuevo gasto</h4>
       </div>
+      <div class="modal-body">
+        <form 
+        #editForm = "ngForm"
+        (ngSubmit) ="UpdateGasto(editForm.value,updateGasto._id)">
+          <div class="form-group">
+            <label for="gasto-id" class="control-label">id:</label>
+            <input type="text" class="form-control" id="gasto-edit" name="_id" ngModel={{updateGasto._id}} disabled> 
+          </div>
+          <div class="form-group">
+            <label for="gasto-monto" class="control-label">monto:</label>
+            <input type="number" class="form-control" id="gasto-monto" name="monto" ngModel={{updateGasto.monto}}> 
+          </div>
+          <div class="form-group">
+            <label for="gasto-descripcion" class="control-label">descripcion:</label>
+            <textarea class="form-control" id="gasto-descripcion" name="descripcion" ngModel={{updateGasto.descripcion}}></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" value="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+      
     </div>
   </div>
 </div>
@@ -34,7 +74,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>#</th>
+      <th>codigo</th>
       <th>Monto</th>
       <th>descripcion</th>
       <th>Fecha</th>
@@ -42,14 +82,15 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>200$</td>
-      <td>compra de juguetes</td>
-      <td>20-17-23</td>
+    <tr *ngFor = "let item of gastos; let ind = index">
+    <!--tr *ngFor="let item of gastos"-->
+      <th scope="row">{{item._id}}</th>
+      <td>{{item.monto}}</td>
+      <td>{{item.descripcion}}</td>
+      <td>{{item.fecha}}</td>
       <td>
-        <span><a (click)="editRegister(ind)"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
-        <span><a (click)="removeRegister(ind)"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
+        <span><a (click)="openModalToEdit(item)"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+        <span><a (click)="DeleteGasto(item)"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
       </td>
     </tr>
     
