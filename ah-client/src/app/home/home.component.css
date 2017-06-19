@@ -1,0 +1,8 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.img-main-carousel{
+    max-height: 500px;
+    margin: 0 auto;
+}
