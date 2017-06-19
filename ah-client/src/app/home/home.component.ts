@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Image } from './image.interface';
+//import { Image } from './image.interface';
 
 @Component({
     selector: 'home-component',
