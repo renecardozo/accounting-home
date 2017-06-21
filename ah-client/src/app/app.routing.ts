@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 const appRoutes: Routes = [
     {
@@ -20,6 +21,9 @@ const appRoutes: Routes = [
     },
     {
       path: 'registro', component: RegistroComponent
+    },
+    {
+        path:'gastos', component: ExpensesComponent
     }
 ];
 export const appRoutingProviders: any[] = [];
