@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { GastoComponent } from './gasto/gasto.component';
 import { IngresoComponent } from './ingreso/ingreso.component';
+import { ExpensesComponent } from './expenses/expenses.component';
 
 const appRoutes: Routes = [
     {
@@ -28,6 +29,9 @@ const appRoutes: Routes = [
     },
     {
       path: 'gasto', component: GastoComponent
+    },
+    {
+        path:'gastos', component: ExpensesComponent
     }
 ];
 export const appRoutingProviders: any[] = [];
