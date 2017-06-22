@@ -18,20 +18,6 @@ export class ItemComponent implements OnInit {
     public rubros: Rubro[];
 
     constructor(private appService: ItemService) {}
-
-    /**
-     * Creates a new rubro
-     */
-    Register(): void {
-        this.appService.create(this.rubro)
-                    .subscribe(
-                        rubro  => {
-                        console.log('create!!', rubro);
-                        this.rubros.push(rubro);
-                        this.GetRubros();
-                        },
-                        error =>  this.errorMessage = <any>error);
-    }
     
     /**
      * Returns all rubros created
@@ -40,9 +26,7 @@ export class ItemComponent implements OnInit {
         this.appService.getRubros()
                         .subscribe(rubros =>
                         {
-                            console.log(typeof(this.rubros));
                             this.rubros = rubros;
-                            console.log(typeof(this.rubros), this.rubros);
                         },
                         error =>  
                         this.errorMessage = <any>error);
@@ -52,8 +36,19 @@ export class ItemComponent implements OnInit {
      * Initialize properties of component.
      */
     ngOnInit(): void {
-        console.log('Initialize!!');
         this.GetRubros();
+    }
+    
+    /**
+     * Creates a new rubro
+     */
+    registerItem(): void {
+        this.appService.create(this.rubro)
+                    .subscribe(
+                        rubro  => {
+                          this.GetRubros();
+                        },
+                        error =>  this.errorMessage = <any>error);
     }
     
     /**
@@ -64,10 +59,7 @@ export class ItemComponent implements OnInit {
         this.appService.update(this.rubro, rubroToUpdate._id)
                     .subscribe(
                         rubro  => {
-                        console.log('update from :', rubroToUpdate, 'to', rubro);
-                        let index = this.rubros.indexOf(rubroToUpdate);
-                        this.rubros[index] = rubro;
-                        this.GetRubros();
+                          this.GetRubros();
                         },
                         error =>  this.errorMessage = <any>error);
     }
@@ -80,9 +72,7 @@ export class ItemComponent implements OnInit {
         this.appService.delete(rubroToDelete._id)
                     .subscribe(
                         rubro  => {
-                        console.log('delete!!', rubroToDelete, 'to', rubro);
-                        let index = this.rubros.indexOf(rubroToDelete);
-                        this.rubros.splice(index, 1);
+                          this.GetRubros();
                         },
                         error =>  this.errorMessage = <any>error);
     }
