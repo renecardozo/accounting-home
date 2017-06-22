@@ -16,6 +16,7 @@ import { GastoComponent } from './gasto/gasto.component';
 import { IngresoComponent } from './ingreso/ingreso.component';
 import { GastoService } from './services/gasto/gasto.service';
 import { IngresoService } from './services/ingreso/ingreso.service';
+import { SaldoComponent } from './saldo/saldo.component';
 
 
 
@@ -28,7 +29,8 @@ import { IngresoService } from './services/ingreso/ingreso.service';
     LoginComponent,
     RegistroComponent,
     GastoComponent,
-    IngresoComponent
+    IngresoComponent,
+    SaldoComponent
   ],
   imports: [
     BrowserModule,

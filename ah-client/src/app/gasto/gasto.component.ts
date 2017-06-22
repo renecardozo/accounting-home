@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, Output,EventEmitter, OnInit } from '@angular/core';
 import { GastoService } from '../services/gasto/gasto.service';
 import { Gasto } from './gasto'
 declare var $: any;
@@ -6,9 +6,11 @@ declare var $: any;
 @Component({
   selector: 'app-gasto',
   templateUrl: './gasto.component.html',
+  outputs:['notificar'],
   styleUrls: ['./gasto.component.css']
 })
 export class GastoComponent implements OnInit {
+  public notificar: EventEmitter<string> = new EventEmitter<string>();
   errorMessage: string;
   public gastos : Gasto[];  
   public updateGasto={};
@@ -20,6 +22,8 @@ export class GastoComponent implements OnInit {
     this.GetGastos();
   }
   Save(gasto:Gasto): void {
+    console.log("antes de emitir");
+    this.notificar.next( "Hola desde el componente hijo: ");
         this.gastoService.create(gasto.monto,gasto.descripcion)
                     .subscribe(
                         gasto  => {
@@ -30,6 +34,7 @@ export class GastoComponent implements OnInit {
                         $( '#formGasto' ).each(function(){
                             this.reset();
                         });
+                      
                         },
                         error =>  this.errorMessage = <any>error);
   }

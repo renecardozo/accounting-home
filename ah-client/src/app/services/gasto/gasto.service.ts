@@ -1,18 +1,3 @@
-/*import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
-@Injectable()
-export class GastoService {
-
-  constructor(private http: Http) { }
-
-  loadGastos(){
-    return this.http.get('http://localhost:3001/api_gasto/gasto').map(
-      (response)=> response.json()
-    )
-  }
-
-}*/
 import { Injectable, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions }  from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -31,10 +16,9 @@ export class GastoService {
   constructor(private http: Http) {
     this.gastosUrl = Settings.protocol+'://'+Settings.host+':'+Settings.port +'/'+Settings.middlewares.gastos;
    }
-
   /**
   * Return all gastos from server.
-  * @return {Observable<Rubro[]>} A list a gastos.
+  * @return {Observable<Gasto[]>} A list a gastos.
   */
   getGastos(): Observable<Gasto[]> {
     return this.http.get(this.gastosUrl)
@@ -66,10 +50,10 @@ export class GastoService {
   }
   
   /**
-   * Update a rubro
-   * @param  {string}            name The name of rubro.
-   * @param  {string}            id   The identify of rubro to be updated.
-   * @return {Observable<Rubro>}
+   * Update a gasto
+   * @param  {string}            name The name of gasto.
+   * @param  {string}            id   The identify of gasto to be updated.
+   * @return {Observable<Gasto>}
    */
   update(descripcion: string,monto: Number, id: string): Observable<Gasto> {
     let headers = new Headers({ 'Content-Type': 'application/json' });

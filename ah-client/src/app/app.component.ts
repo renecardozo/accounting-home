@@ -3,4 +3,5 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: '<header-component></header-component>'
 })
-export class AppComponent {}
+export class AppComponent {
+}

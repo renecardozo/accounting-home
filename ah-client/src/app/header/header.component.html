@@ -9,6 +9,9 @@
   <li class="right"><a routerLink="login">Login</a></li>
   <li class="right"><a routerLink="registro">Registro</a></li>
 </ul>
+<app-saldo [saldo]= "4250" (notificar)="handleMyEvent($event)"></app-saldo>
+
+  
 <div>
   <router-outlet></router-outlet>
 </div>
