@@ -20,9 +20,7 @@ function signUp(req, res){
 
 function signIn(req, res){
     User.find({email: req.body.email}, (err, user) =>{
-		user = user[0];
-        console.log('the user is')
-        console.log(user)
+		    user = user[0];
         if(err) return res.status(500).send({message: err})
         if(!user) return res.status(404).send({message: 'No existe el usuario'})
 

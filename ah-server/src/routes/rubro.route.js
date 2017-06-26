@@ -1,8 +1,6 @@
 'use strict'
-//const express = require('express')
-import express from 'express';
-//const RubroCrl = require('../controllers/rubro.controller')
-import RubroCrl from '../controllers/rubro.controller';
+const express = require('express')
+const RubroCrl = require('../controllers/rubro.controller')
 const api = express.Router()
 
 api.get('/rubro',RubroCrl.getRubros)
