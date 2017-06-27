@@ -3,7 +3,8 @@ const settings: any = {
     protocol: 'http',
     port: '3001',
     middlewares: {
-        rubros: 'api_rubro/rubro'
+        rubros: 'api_rubro/rubro',
+        gastos: 'api_gasto/gasto'
     }
 }
 export const Settings = settings;
