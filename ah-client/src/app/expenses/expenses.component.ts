@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GastoService } from './expense.service';
-import { Gasto } from './gasto';
+import { ItemService } from './expenses.service';
+import { Expenses } from './expenses';
 import { Observable } from 'rxjs/Observable';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
@@ -9,7 +9,7 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
     templateUrl: 'expenses.component.html',
     styleUrls: ['expenses.component.css'],
     providers: [
-        GastoService
+        ItemService
     ]
 })
 export class ExpensesComponent implements OnInit{
@@ -19,9 +19,9 @@ export class ExpensesComponent implements OnInit{
     date: DateModel;
     options: DatePickerOptions;
    
-    public gastos: Gasto[];
+    public gastos: Expenses[];
 
-    constructor(private gastoService: GastoService) {
+    constructor(private gastoService: ItemService) {
         this.options = new DatePickerOptions();
         this.options.maxDate = new Date(Date.now());
         this.options.minDate = new Date(Date.now());
