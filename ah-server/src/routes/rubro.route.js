@@ -1,13 +1,14 @@
 'use strict'
-//const express = require('express')
+
 import express from 'express';
-//const RubroCrl = require('../controllers/rubro.controller')
 import RubroCrl from '../controllers/rubro.controller';
+const GastoCrl = require('../controllers/gasto.controller');
 const api = express.Router()
 
 api.get('/rubro',RubroCrl.getRubros)
 api.get('/rubro/:rubroId',RubroCrl.getRubro)
 api.post('/rubro', RubroCrl.saveRubro)
+api.post('/rubro/:rubroId/gasto', GastoCrl.saveGasto)
 api.put('/rubro/:rubroId',RubroCrl.updateRubro)
 api.delete('/rubro/:rubroId',RubroCrl.deleteRubro)
 

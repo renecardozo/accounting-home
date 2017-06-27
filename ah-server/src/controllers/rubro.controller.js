@@ -1,4 +1,4 @@
-'ues strict'
+'use strict'
 
 const Rubro = require('../models/rubro.model')
 

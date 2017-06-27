@@ -3,14 +3,22 @@ import { Http, Response, Headers, RequestOptions }  from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Expenses } from './expenses';
 import { Settings } from '../app.config';
+
 @Injectable()
 export class ItemService {
   private gastosUrl;
-  constructor(private http: Http) {
+
+   constructor(private http: Http) {
       this.gastosUrl = Settings.protocol+'://'+Settings.host+':'+Settings.port +'/'+Settings.middlewares.gastos;
    }
 
-  update(name: string, id: string): Observable<Expenses> {
+   getGastos(): Observable<Expenses[]> {
+    return this.http.get(this.gastosUrl)
+                    .map(res => { return res.json().gastos; })
+                    .catch(this.handleError);
+    }
+
+   update(name: string, id: string): Observable<Expenses> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     

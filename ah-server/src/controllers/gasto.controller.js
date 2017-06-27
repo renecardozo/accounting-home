@@ -1,16 +1,33 @@
-'ues strict'
+'use strict'
 
-const Gasto = require('../models/gasto.model')
+const Gasto = require('../models/gasto.model');
+const Rubro = require('../models/rubro.model');
 
 function saveGasto(req, res){
-    let gasto= new Gasto({
+    let rubroId = req.params.rubroId;
+
+    Rubro.findById(rubroId, (err, rubro) => {
+        if(err) return res.status(500).send({message: `Error al realizar la petcion ${err}`})
+
+        if(!rubro) return res.status(404).send({message: `El rubro no existe`})
+
+        let gasto= new Gasto({
         descripcion: req.body.descripcion,
-        monto: req.body.monto
-    })
-    gasto.save((err, gastoStored) =>{
+        monto: req.body.monto,
+        rubro: rubro,
+        fecha: req.body.fecha
+        });
+    
+        gasto.save((err, gastoStored) => {
         if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
 
-        res.status(200).send({gasto: gastoStored})
+        rubro.gastos.push(gasto);
+        rubro.save((err, rubroStored) => {
+                if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
+
+                res.status(200).send({gasto: gastoStored});
+            });
+        });
     })
 }
 
@@ -27,7 +44,7 @@ function getGasto(req, res){
 
 async function getGastos(req, res){
 	try {
-		let Gasto = await Gasto.find({});
+		let gastos = await Gasto.find({});
 		if(!gastos) return res.status(404).send({message: `no existen gastos`})
 			res.status(200).send({gastos})		
 	} catch (err){
