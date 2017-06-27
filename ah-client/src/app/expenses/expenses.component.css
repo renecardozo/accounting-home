@@ -1,0 +1,57 @@
+.table-container{
+    overflow-x:auto;
+    padding-top: 50px;
+}
+
+
+table {
+  width: 100%;
+}
+
+th {
+  height: 20px;
+  text-align: left;
+  background-color: #15A9FA;
+  color: white;
+  font-size: 110%;
+}
+td {
+  height: 15px;
+  vertical-align: bottom;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover, tr:nth-child(even):hover {background-color: #ddefff}
+
+tr:nth-child(even) {background-color: #f2f2f2}
+
+td:first-child {
+  width: 85%;
+}
+.ah-btn {
+  background-color: #15A9FA; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.ah-style-btn:hover {
+  background-color: white;
+  color: #15A9FA;
+}
+.action-performed:hover {
+    cursor: pointer;
+    background-color: #15A9FA;
+    color: #FFFFFF;
+}

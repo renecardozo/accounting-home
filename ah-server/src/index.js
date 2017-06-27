@@ -1,11 +1,19 @@
-import http from 'http';
-import Food from './database/db-manager';
+'use strict'
+import mongoose from 'mongoose';
+import app from './app';
+import config from './config';
 
-http.createServer((req, res) => {
-  let food = new Food('Neko');
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  food.print();
-  res.end('Hello World!!' + food.toString());
-}).listen(3001, ()=>{
-  console.log('Server running at http://127.0.0.1:3001');
-});
+async function listen() {
+    try {
+		mongoose.Promise = global.Promise;
+		await mongoose.connect(config.db);
+		console.log('Conexion a la base de datos establecida...');
+		await app.listen(config.port);
+		console.log(`Accounting Home app listening on port: ${config.port}!`);
+
+	} catch (err){
+		console.log(`Error al conectar a la base de datos: ${err}`);
+	}
+}	
+
+listen();

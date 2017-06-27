@@ -1,0 +1,75 @@
+.navbar {
+  background-color: transparent;
+}
+
+.scrolling-navbar {
+  -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+  -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+  transition: background .5s ease-in-out, padding .5s ease-in-out;
+}
+
+.top-nav-collapse {
+  background-color: #3c4f74;
+}
+
+footer.page-footer {
+  background-color: #3c4f74;
+  margin-top: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #1C2331;
+  }
+}
+/*Call to action*/
+
+.flex-center {
+  color: #111111;
+}
+
+.view {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/*Contact section*/
+.centered-form .panel{
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+
+
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+#contact .fa {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1C2331;
+}
+.ampliar{
+  margin-bottom: 100px;
+}
+.centered-form{
+  margin-top: 60px;
+}
+.cambio{
+  background-color: #000000;
+}
+
+.centered-form .panel{
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+
+.centered-text {
+  text-align:center;
+}

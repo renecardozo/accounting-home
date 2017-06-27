@@ -1,10 +1,10 @@
-import { AhClientPage } from './app.po';
+import { NewClientPage } from './app.po';
 
-describe('ah-client App', function() {
-  let page: AhClientPage;
+describe('new-client App', () => {
+  let page: NewClientPage;
 
   beforeEach(() => {
-    page = new AhClientPage();
+    page = new NewClientPage();
   });
 
   it('should display message saying app works', () => {
