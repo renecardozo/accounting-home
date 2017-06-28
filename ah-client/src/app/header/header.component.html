@@ -5,8 +5,13 @@
   <li><a [class.active]="route=='routeHome'" (click)="route='routeHome'" routerLink="/home">Inicio</a></li>
   <li><a [class.active]="route=='routeItems'" (click)="route='routeItems'" routerLink="/item">Rubros</a></li>
   <li><a [class.active]="route=='routeExpenses'" (click)="route='routeExpenses'" routerLink="/gastos">Gastos</a></li>
+  <li><a [class.active]="route=='routeIngresos'" (click)="route='routeIngresos'" routerLink="/ingreso">Ingresos</a></li>
+  
   <li class="right"><a routerLink="login">Login</a></li>
 </ul>
+<app-saldo [saldo]= "4250" (notificar)="handleMyEvent($event)"></app-saldo>
+
+  
 <div>
   <router-outlet></router-outlet>
 </div>

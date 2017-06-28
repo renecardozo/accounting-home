@@ -2,8 +2,6 @@
 const FondoAhorro = require('../models/fondo-ahorro.model');
 
 function saveFondoAhorro(req, res){
-    console.log('POST/api/fondoahorro');
-    console.log(req.body);
     let fondo= new FondoAhorro();
     fondo.monto= req.body.monto;
     fondo.total= req.body.total;

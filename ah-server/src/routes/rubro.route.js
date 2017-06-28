@@ -2,7 +2,8 @@
 
 import express from 'express';
 import RubroCrl from '../controllers/rubro.controller';
-const GastoCrl = require('../controllers/gasto.controller');
+import GastoCrl from '../controllers/gasto.controller';
+
 const api = express.Router()
 
 api.get('/rubro',RubroCrl.getRubros)

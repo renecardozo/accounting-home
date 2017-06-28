@@ -3,47 +3,46 @@ import { Http, Response, Headers, RequestOptions }  from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Expense } from './expense';
-import { Settings } from '../app.config';
+import { Ingreso } from '../../ingreso/ingreso';
+import { Settings } from '../../app.config';
 
 @Injectable()
-export class ExpenseService {
-  private expensesUrl;
+export class IngresoService {
+  private ingresosUrl;
   /**
    * Initialize the setting for this service.
    * @param {Http} private http [description]
    */
   constructor(private http: Http) {
-    this.expensesUrl = Settings.protocol+'://'+Settings.host+':'+Settings.port +'/'+Settings.middlewares.gastos;
+    this.ingresosUrl = Settings.protocol+'://'+Settings.host+':'+Settings.port +'/'+Settings.middlewares.ingresos;
    }
+
   /**
-  * Return all expenses from server.
-  * @return {Observable<Expense[]>} A list a expenses.
+  * Return all ingresos from server.
+  * @return {Observable<Ingreso[]>} A list a ingresos.
   */
-  getExpenses(): Observable<Expense[]> {
-    return this.http.get(this.expensesUrl)
-                    .map(res => { return res.json().gastos; })
+  getIngresos(): Observable<Ingreso[]> {
+    return this.http.get(this.ingresosUrl)
+                    .map(res => { return res.json().ingresos; })
                     .catch(this.handleError);
   }
 
   /**
-   * Creates a new gasto
-   * @param  {string}            description The description for the new gasto
-   * @param  {string}            monto The monto for the new gasto
-   * @return {Observable<Gasto>}      The gasto created.
+   * Creates a new ingreso
+   * @param  {string}            description The description for the new ingreso
+   * @param  {string}            monto The monto for the new ingreso
+   * @return {Observable<Ingreso>}      The ingreso created.
    */
-  create(monto: Number,descripcion: string,rubro:string): Observable<Expense> {
-    console.log("el rubro que llega al servicio es:"+ rubro);
+  create(monto: number,descripcion: string): Observable<Ingreso> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     
     if (this.validateName(descripcion)) {
       return this.http.post(
-          this.expensesUrl,
+          this.ingresosUrl,
                    { 
                      "descripcion": descripcion,
-                     "monto": monto ,
-                     "rubro" : rubro
+                     "monto": monto 
                   }, 
                    options)
                     .map(this.extractData)
@@ -52,24 +51,21 @@ export class ExpenseService {
   }
   
   /**
-   * Update a gasto
-   * @param  {string}            name The name of gasto.
-   * @param  {string}            id   The identify of gasto to be updated.
-   * @return {Observable<Gasto>}
+   * Update a ingreso
+   * @param  {string}            name The name of ingreso.
+   * @param  {string}            id   The identify of ingreso to be updated.
+   * @return {Observable<Ingreso>}
    */
-  update(descripcion: string,monto: Number,rubro:string, id: string): Observable<Expense> {
-    console.log("el rubro que llega al servicio es:");
-    console.log(rubro);
+  update(descripcion: string,monto: number, id: string): Observable<Ingreso> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     
     if (this.validateName(descripcion)) {
       return this.http
-                    .put(this.expensesUrl+'/'+id,
+                    .put(this.ingresosUrl+'/'+id,
                      { 
                        "descripcion": descripcion,
-                       "monto" : monto,
-                       "rubro" : rubro
+                       "monto" : monto
                     }, options)
                     .map(this.extractData)
                     .catch(this.handleError);
@@ -78,12 +74,12 @@ export class ExpenseService {
   
   /**
    * Deletes a gsto given the id
-   * @param  {string}            id The id property of gasto.
-   * @return {Observable<Gasto>}
+   * @param  {string}            id The id property of ingreso.
+   * @return {Observable<Ingreso>}
    */
-  delete(id: string): Observable<Expense> {
+  delete(id: string): Observable<Ingreso> {
     if (id !== undefined) {
-      return this.http.delete(this.expensesUrl+'/'+id)
+      return this.http.delete(this.ingresosUrl+'/'+id)
                     .map(this.extractData)
                     .catch(this.handleError);
     }

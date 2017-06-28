@@ -14,12 +14,15 @@
                 <th>Descripcion</th>
                 <th>Rubro</th>
                 <th>Fecha de Creacion</th>
+                <th>Acciones</th>
             </tr>
-            <tr *ngFor="let item of gastos">
+            <tr *ngFor="let item of expenses">
                 <td>{{item.monto}}</td>
                 <td>{{item.descripcion}}</td>
-                <td>{{item.rubro.rubro}}</td>
-                <td>{{item.date}}</td>
+                <td>{{item.rubro}}</td>
+                <td>{{item.fecha}}</td>
+                <td><i class="fa fa-pencil" aria-hidden="true" (click)="openModalToEdit(item)"></i>        <i class="fa fa-trash" aria-hidden="true" (click)="deleteExpense(item)"></i></td>
+            
             </tr>
         </table>
     </div>
@@ -29,7 +32,6 @@
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -37,14 +39,16 @@
         <h4 class="modal-title">Administracion de Gastos</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form
+         #gastoForm = "ngForm"
+        (ngSubmit) ="Save(gastoForm.value)" id="formGasto">
             <div class="form-group">
-                <label for="email">Monto</label>
-                <input type="email" class="form-control" id="email">
+                <label for="number">Monto</label>
+                <input type="number" class="form-control" id="monto" name="monto" ngModel>
             </div>
             <div class="form-group">
                 <label for="comment">Descripcion</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+                <textarea class="form-control" rows="5" id="comment" name="descripcion" ngModel></textarea>
             </div>
             <div class="form-group">
                 <div class="input-group">
@@ -53,26 +57,70 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                        <li><a class="action-performed" (click)="optionSelected = 'Action'">Action</a></li>
-                        <li><a class="action-performed" (click)="optionSelected = 'Action 2'">Action 2</a></li>
-                        <li><a class="action-performed" (click)="optionSelected = 'Action 3'">Action 3</a></li>
-                        <li><a class="action-performed" (click)="optionSelected = 'Action 4'">Action 4</a></li>
+                        <li *ngFor="let item of rubros"><a class="action-performed" (click)="optionSelected = setRubro(item)">{{item.rubro}}</a></li>
                         </ul>
-                    </div><!-- /btn-group -->
-                    <input type="text" [(ngModel)]="optionSelected" class="form-control" aria-label="..." name="optionSelectedName">
-                </div><!-- /input-group -->
+                    </div>
+                    <input type="text" [(ngModel)]="optionSelected" class="form-control" aria-label="..." name="rubro">
+                </div>
             </div>
             <div class="form-group">
                 <label for="datePicker">Fecha de Creacion</label>
-                <ng2-datepicker [options]="options" [(ngModel)]="date" name="datePicker"></ng2-datepicker>
+                <ng2-datepicker [options]="options"  name="datePicker" ngModel></ng2-datepicker>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Expense -->
+<div id="updateGasto" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- expense Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editar gastos de Gastos</h4>
+      </div>
+      <div class="modal-body">
+        <form
+         #gastoFormEdit = "ngForm"
+        (ngSubmit) ="editExpense(gastoFormEdit.value,updateExpense._id)" id="formGasto">
+            <div class="form-group">
+                <label for="number">Monto</label>
+                <input type="number" class="form-control" id="monto" name="monto" ngModel={{updateExpense.monto}}>
+            </div>
+            <div class="form-group">
+                <label for="comment">Descripcion</label>
+                <textarea class="form-control" rows="5" id="comment" name="descripcion" ngModel={{updateExpense.descripcion}}></textarea>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rubro 
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li *ngFor="let item of rubros"><a class="action-performed" (click)="optionSelected = setRubro(item)">{{item.rubro}}</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" aria-label="..." name="rubro" ngModel={{updateExpense.rubro}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="datePicker">Fecha de Creacion</label>
+                <ng2-datepicker [options]="options"  name="fecha" ngModel={{updateExpense.fecha}}></ng2-datepicker>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" value="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </form>
       </div>
     </div>
-
   </div>
 </div>

@@ -1,7 +1,8 @@
 'use strict'
+
 import mongoose from 'mongoose';
-import app from './app';
-import config from './config';
+const app = require('./app')
+const config = require('./config')
 
 async function listen() {
     try {

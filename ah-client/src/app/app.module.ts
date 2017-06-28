@@ -15,6 +15,10 @@ import { RegistroComponent } from "./registro/registro.component";
 import { ExpensesComponent } from "./expenses/expenses.component";
 import { Settings } from './app.config';
 import { routing, appRoutingProviders } from './app.routing';
+import { IngresoComponent } from './ingreso/ingreso.component';
+import { IngresoService } from './services/ingreso/ingreso.service';
+import { SaldoComponent } from './saldo/saldo.component';
+import { ExpenseService } from './expenses/expenses.service';
 
 
 
@@ -26,6 +30,8 @@ import { routing, appRoutingProviders } from './app.routing';
     HeaderComponent,
     LoginComponent,
     RegistroComponent,
+    IngresoComponent,
+    SaldoComponent,
     ExpensesComponent
   ],
   imports: [
@@ -38,7 +44,9 @@ import { routing, appRoutingProviders } from './app.routing';
     routing
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    IngresoService,
+    ExpenseService
   ],
   bootstrap: [
     AppComponent

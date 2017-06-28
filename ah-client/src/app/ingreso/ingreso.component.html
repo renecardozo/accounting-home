@@ -1,0 +1,97 @@
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Registrar un ingreso
+</button>
+
+<!-- Modal Create ingreso-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Agregar un nuevo ingreso</h4>
+      </div>
+      <div class="modal-body">
+        <form 
+        #ingresoForm = "ngForm"
+        (ngSubmit) ="Save(ingresoForm.value)" id="formIngreso">
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">monto:</label>
+            <input type="number" class="form-control" id="recipient-name" name="monto" ngModel> 
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label">descripcion:</label>
+            <textarea class="form-control" id="message-text" name="descripcion" ngModel></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" value="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!--Modal Edit ingreso-->
+<div class="modal fade" id="updateIngreso" tabindex="-1" role="dialog" aria-labelledby="editIngreso">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editIngreso">Editar un nuevo ingreso</h4>
+      </div>
+      <div class="modal-body">
+        <form 
+        #editForm = "ngForm"
+        (ngSubmit) ="UpdateIngreso(editForm.value,updateIngreso._id)">
+          <div class="form-group">
+            <label for="ingreso-id" class="control-label">id:</label>
+            <input type="text" class="form-control" id="ingreso-edit" name="_id" ngModel={{updateIngreso._id}} disabled> 
+          </div>
+          <div class="form-group">
+            <label for="ingreso-monto" class="control-label">monto:</label>
+            <input type="number" class="form-control" id="ingreso-monto" name="monto" ngModel={{updateIngreso.monto}}> 
+          </div>
+          <div class="form-group">
+            <label for="ingreso-descripcion" class="control-label">descripcion:</label>
+            <textarea class="form-control" id="ingreso-descripcion" name="descripcion" ngModel={{updateIngreso.descripcion}}></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" value="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<!--table ingresos-->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>codigo</th>
+      <th>Monto</th>
+      <th>descripcion</th>
+      <th>Fecha</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let item of ingresos; let ind = index">
+      <th scope="row">{{item._id}}</th>
+      <td>{{item.monto}}</td>
+      <td>{{item.descripcion}}</td>
+      <td>{{item.fecha}}</td>
+      <td>
+        <span><a (click)="openModalToEdit(item)"><i class="fa fa-pencil" aria-hidden="true"></i></a></span>
+        <span><a (click)="DeleteIngreso(item)"><i class="fa fa-trash" aria-hidden="true"></i></a></span>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>

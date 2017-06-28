@@ -5,4 +5,17 @@ import { Component } from '@angular/core';
     styleUrls: ['header.component.css']
 })
 export class HeaderComponent {
+
+    nombre:number;
+
+    constructor() { }
+
+    ngOnInit() {
+    this.nombre = 340;
+  }
+  handleMyEvent(arg){
+    console.log("manejando eventos",arg);
+  }
+
+    
 }
