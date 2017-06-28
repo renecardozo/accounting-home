@@ -1,6 +1,6 @@
-'ues strict'
+'use strict'
 
-const Rubro = require('../models/rubro.model')
+import Rubro from '../models/rubro.model';
 
 function saveRubro(req, res){
     let rubro= new Rubro({

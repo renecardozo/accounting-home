@@ -1,6 +1,6 @@
 'use strict'
-const express = require('express')
-const GastoCrl = require('../controllers/gasto_especifico.controller')
+import express from 'express';
+import GastoCrl from '../controllers/gasto_especifico.controller';
 const api = express.Router()
 
 api.get('/gastos_especifico',GastoCrl.getGastosEspecificos)

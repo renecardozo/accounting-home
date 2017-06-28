@@ -37,6 +37,7 @@ export class ItemComponent implements OnInit {
      */
     ngOnInit(): void {
         this.GetRubros();
+        console.log(this.rubros);
     }
     
     /**

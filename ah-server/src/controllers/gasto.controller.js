@@ -1,6 +1,6 @@
 'ues strict'
 
-const Gasto = require('../models/gasto.model')
+import Gasto from '../models/gasto.model';
 
 function saveGasto(req, res){
     let gasto= new Gasto({
