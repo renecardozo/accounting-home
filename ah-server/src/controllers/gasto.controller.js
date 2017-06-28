@@ -4,31 +4,24 @@ const Gasto = require('../models/gasto.model');
 const Rubro = require('../models/rubro.model');
 
 function saveGasto(req, res){
-    let rubroId = req.params.rubroId;
+    let gasto= new Gasto({
+      descripcion: req.body.descripcion,
+      monto: req.body.monto,
+      rubro: req.body.rubro,
+      fecha: req.body.fecha
+      });
 
-    Rubro.findById(rubroId, (err, rubro) => {
-        if(err) return res.status(500).send({message: `Error al realizar la petcion ${err}`})
+      gasto.save((err, gastoStored) => {
+      if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
+      res.status(200).send({gasto: gastoStored});
+     // AQUI ya no es necesario actualizar gastos
+      // rubro.gastos.push(gasto);
+      // rubro.save((err, rubroStored) => {
+      //         if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
 
-        if(!rubro) return res.status(404).send({message: `El rubro no existe`})
-
-        let gasto= new Gasto({
-        descripcion: req.body.descripcion,
-        monto: req.body.monto,
-        rubro: rubro,
-        fecha: req.body.fecha
-        });
-    
-        gasto.save((err, gastoStored) => {
-        if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
-
-        rubro.gastos.push(gasto);
-        rubro.save((err, rubroStored) => {
-                if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
-
-                res.status(200).send({gasto: gastoStored});
-            });
-        });
-    })
+      //         r
+      //     });
+      });
 }
 
 function getGasto(req, res){
