@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
-import { GastoComponent } from './gasto/gasto.component';
 import { IngresoComponent } from './ingreso/ingreso.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 
@@ -26,9 +25,6 @@ const appRoutes: Routes = [
     },
     {
       path: 'ingreso', component: IngresoComponent
-    },
-    {
-      path: 'gasto', component: GastoComponent
     },
     {
         path:'gastos', component: ExpensesComponent

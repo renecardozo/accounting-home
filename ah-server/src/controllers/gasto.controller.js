@@ -5,7 +5,8 @@ const Gasto = require('../models/gasto.model')
 function saveGasto(req, res){
     let gasto= new Gasto({
         descripcion: req.body.descripcion,
-        monto: req.body.monto
+        monto: req.body.monto,
+        rubro: req.body.rubro
     })
     gasto.save((err, gastoStored) =>{
         if(err) res.status(500).send({ message: `Error al salvar la base de datos: ${err}`})
@@ -43,6 +44,8 @@ async function getGastos(req, res){
 }
 
 function updateGasto(req, res){
+    console.log("el gasto que llega es:");
+    console.log(req);
     let gastoId= req.params.gastoId
     let update = req.body
 
